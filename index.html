@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>
+
+<body>
+    <div id=app>
+        <p v-bind:title='title'>
+            {{message}}
+        </p>
+        <transition name = 'fade'>
+            <p v-if='seen'>
+                    {{message}}
+            </p>
+        </transition>
+        <ol>
+            <li v-for="item in todo">
+                {{item.text}}
+            </li>
+        </ol>
+
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+</body>
+
+<script>
+    var app = new Vue ({
+        el: '#app',
+        data: {
+            message: 'This is here',
+            title: "you loaded this page " + new Date().toLocaleString(),
+            seen: true,
+            todo: [
+                {text: "The First"},
+                {text: "The Second"},
+                {text: "The Third"},
+                {text: "The Fourth"}
+            ]
+        },
+        methods: {
+            reverseMessage: function(){
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+    
+</script>
+
+</html>
