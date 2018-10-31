@@ -33,6 +33,25 @@
         <button v-on:click="reverseMessage">Reverse Message</button>
     </div>
 
+    <div id = app2>
+        <p>{{message2}}</p>
+        <input v-model ="message2">
+        <button v-on:click="reverse">Reverse 2</button>
+        
+        <ol>
+            <li v-for="w in list" >{{w.word}}</li>
+        </ol>
+
+    </div>
+    <div id=app3>
+        <ol>
+            <todo-item
+                v-for= "item in glist"
+                v-bind:cart= "item"
+                v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
 </body>
 
 <script>
@@ -55,6 +74,49 @@
             }
         }
     })
+
+    var app2 = new Vue ({
+        el: '#app2',
+        data: {
+            message2: 'This is here agian',
+            seen: false,
+            list: [
+                {word: "first"},
+                {word: "Second"},
+                {word: "Third"},
+                {word: "Fourth"}
+
+            ]
+        },
+        methods: {
+            reverse: function(){
+                this.message2 = this.message2.split('').reverse().join('');
+                // if (this.seen == false){
+                //     this.seen = true;
+                // }else{
+                //     this.seen = false;
+                // }
+            }
+        }
+    })
+
+    Vue.component('todo-item', {
+        props:['cart'],
+        template: '<li>{{cart.text}}</li>'
+    })
+
+    var app3 = new Vue({
+        el: "#app3",
+        data: {
+            glist: [
+                {id: 0, text: "orange"},
+                {id: 1, text: "apple"},
+                {id: 2, text: "banana"},
+                {id: 2, text: "raspberry"}
+            ]
+        }
+    })
+
     
 </script>
 
